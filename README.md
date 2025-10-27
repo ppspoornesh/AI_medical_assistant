@@ -14,7 +14,7 @@ All **compulsory** parts (1‑4) are fully implemented.
 | **Multi‑format docs** | PDF, DOCX, XLSX, images (PyPDF2, python‑docx, openpyxl, OCR) |
 
 ### Architecture Diagram
-`docs/architecture.png`
+`architecture.png`
 
 ### Tech Stack
 | Component | Technology |
