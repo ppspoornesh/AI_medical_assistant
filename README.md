@@ -33,7 +33,7 @@ All **compulsory** parts (1‑4) are fully implemented.
 
 ```bash
 # 1. Clone / unzip the project
-unzip Medical-AI-Assistant.zip   # or git clone ...
+unzip AI_medical_assistant.zip   # or git clone ...
 
 # 2. Create a virtual environment
 python -m venv .venv
