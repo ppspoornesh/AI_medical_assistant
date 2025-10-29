@@ -1,58 +1,76 @@
+# Medical AI Assistant – GenAI Engineer Hiring Task
 
-# GenAI Engineer Hiring Task – Medical AI Assistant
-
-All **compulsory** parts (1‑4) are fully implemented.
-
-### Features Delivered
-| Requirement | Implementation |
-|-------------|----------------|
-| **RAG + memory** | LangChain + FAISS + `ConversationBufferMemory` |
-| **Report generation** | LLM function‑calling → exact extraction → `ReportLab` PDF |
-| **Agentic flow** | 6 specialized agents + LangGraph orchestrator |
-| **API** | FastAPI (`/docs` endpoint) |
-| **Frontend** | Streamlit (upload, chat, download PDF) |
-| **Multi‑format docs** | PDF, DOCX, XLSX, images (PyPDF2, python‑docx, openpyxl, OCR) |
-
-### Architecture Diagram
-`architecture.png`
-
-### Tech Stack
-| Component | Technology |
-|-----------|------------|
-| Backend | **FastAPI**, Uvicorn |
-| Frontend | **Streamlit** |
-| LLM | **Ollama** (`llama3:8b` + `nomic‑embed‑text`) |
-| RAG | **LangChain**, **FAISS**, **LangGraph** |
-| Document parsing | **PyPDF2**, **python‑docx**, **openpyxl**, **pytesseract** |
-| PDF generation | **ReportLab** |
-| Environment | Python 3.11, `requirements.txt` |
+*All 4 compulsory parts are fully implemented.*  
+*100% local, private, secure for medical data.*
 
 ---
 
-## How to Run Locally
+## Hiring Task Requirements – 100% Covered
 
-```bash
-# 1. Clone / unzip the project
-unzip AI_medical_assistant.zip   # or git clone ...
+| *Part* | *Requirement* | *Implementation* |
+|--------|------------------|---------------------|
+| *Part 1* | RAG + memory across turns | FAISS + nomic-embed-text + ConversationBufferMemory |
+| *Part 2* | Exact report + PDF export | ReportLab + *no rewriting* (only summarize if requested) |
+| *Part 3* | Agentic flow + orchestrator | LangGraph + 6 specialized agents |
+| *Part 4* | API + chat UI | FastAPI + Streamlit |
 
-# 2. Create a virtual environment
+---
+
+## Architecture Overview
+
+![Architecture Diagram](docs/architecture.png)
+
+> *User* → Streamlit → FastAPI → LangGraph Orchestrator →  
+> → *QA Path*: FAISS → llama3:8b + memory  
+> → *Report Path*: Extraction → ReportLab PDF
+
+---
+
+## Tech Stack (Why Chosen)
+
+| Component | Tool | Reason |
+|---------|------|--------|
+| LLM | Ollama + llama3:8b | Local, private, free |
+| Embeddings | nomic-embed-text | High-quality, lightweight |
+| RAG | LangChain + FAISS | Fast, modular |
+| Agents | LangGraph | Stateful workflows |
+| Backend | FastAPI | Async, OpenAPI docs |
+| Frontend | Streamlit | Rapid UI |
+| PDF | ReportLab | Structured output |
+| Parsing | PyPDF2, openpyxl, pytesseract | Multi-format support |
+
+---
+
+## How to Run (Any PC – Windows/Mac/Linux)
+
+> **Warning: Do NOT use .venv, .vscode, temp, or vectorstore from GitHub — they are machine-specific.**
+
+```powershell
+# 1. Clone the project
+git clone https://github.com/ppspoornesh/AI_medical_assistant.git
+cd AI_medical_assistant
+
+# 2. [OPTIONAL BUT RECOMMENDED] Clean machine-specific files
+#    (Safe — only removes junk from Git, keeps your local code)
+git rm -r --cached .venv .vscode temp vectorstore 2>$null
+git commit -m "Clean repo: remove machine-specific files" || echo "Already clean"
+
+# 3. Create fresh virtual environment
 python -m venv .venv
-.\.venv\Scripts\activate   # Windows
+.\.venv\Scripts\activate    # Windows
 # source .venv/bin/activate   # macOS/Linux
 
-# 3. Install dependencies
+# 4. Install exact dependencies
 pip install -r requirements.txt
 
-# 4. Start Ollama (required for LLM)
-#   - Install Ollama from https://ollama.com
-#   - Run in a separate terminal:
+# 5. Start Ollama (in a separate terminal)
 ollama serve
 ollama pull llama3:8b
 ollama pull nomic-embed-text
 
-# 5. Launch the app (two processes)
-#   Terminal 1 – FastAPI
+# 6. Launch app
+# Terminal 1 – Backend
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 
-#   Terminal 2 – Streamlit UI
+# Terminal 2 – Frontend
 streamlit run frontend/streamlit_app.py --server.port 8501
