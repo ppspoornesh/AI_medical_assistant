@@ -18,7 +18,7 @@
 
 ## Architecture Overview
 
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram](architecture.png)
 
 > *User* → Streamlit → FastAPI → LangGraph Orchestrator →  
 > → *QA Path*: FAISS → llama3:8b + memory  
