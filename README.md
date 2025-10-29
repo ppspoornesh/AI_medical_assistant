@@ -50,25 +50,20 @@
 git clone https://github.com/ppspoornesh/AI_medical_assistant.git
 cd AI_medical_assistant
 
-# 2. [OPTIONAL BUT RECOMMENDED] Clean machine-specific files
-#    (Safe — only removes junk from Git, keeps your local code)
-git rm -r --cached .venv .vscode temp vectorstore 2>$null
-git commit -m "Clean repo: remove machine-specific files" || echo "Already clean"
-
-# 3. Create fresh virtual environment
+# 2. Create fresh virtual environment
 python -m venv .venv
 .\.venv\Scripts\activate    # Windows
 # source .venv/bin/activate   # macOS/Linux
 
-# 4. Install exact dependencies
+# 3. Install exact dependencies
 pip install -r requirements.txt
 
-# 5. Start Ollama (in a separate terminal)
+# 4. Start Ollama (in a separate terminal)
 ollama serve
 ollama pull llama3:8b
 ollama pull nomic-embed-text
 
-# 6. Launch app
+# 5. Launch app
 # Terminal 1 – Backend
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 
