@@ -43,7 +43,7 @@
 
 ## How to Run (Any PC – Windows/Mac/Linux)
 
-> **Warning: Do NOT use .venv, .vscode, temp, or vectorstore from GitHub — they are machine-specific.**
+
 
 ```powershell
 # 1. Clone the project
